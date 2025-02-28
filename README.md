@@ -94,4 +94,3 @@ Ollama Vortex UI is a modern and intuitive user interface for interacting with l
 ---
 
 Feel free to explore the code, report issues, or suggest improvements. Enjoy using Ollama Vortex UI! 🚀
-```
