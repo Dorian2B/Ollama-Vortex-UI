@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortex UI</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../src/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Loader initial -->
+        <div id="initialLoader" class="initial-loader">
+            <div class="loader-content">
+                <div class="loader-spinner"></div>
+                <div class="loader-text">Initialisation de Vortex UI</div>
+                <div class="loader-progress">
+                    <div class="loader-progress-bar"></div>
+                </div>
+                <div class="loader-steps">
+                    <div class="loader-step active">Chargement des ressources</div>
+                    <div class="loader-step">Initialisation de l'interface</div>
+                    <div class="loader-step">Connexion aux services</div>
+                    <div class="loader-step">Préparation des modèles</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-text">Vortex UI</span>
+                </div>
+                <div class="header-actions">
+                    <button id="settingsBtn" class="settings-btn" data-tooltip="Paramètres" data-tooltip-position="bottom">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                    <button id="modelBtn" class="model-selector" data-tooltip="Changer de modèle" data-tooltip-position="bottom">
+                        <i class="fas fa-microchip"></i>
+                        <span class="model-name">Modèle</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <button id="resetBtn" class="reset-btn" data-tooltip="Réinitialiser la conversation" data-tooltip-position="bottom">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Zone de chat principale -->
+        <main class="chat-container">
+            <!-- Welcome Label -->
+            <div id="welcomeLabel" class="welcome-label">
+                <h2>Bonjour ! Comment puis-je vous aider ?</h2>
+            </div>
+            
+            <div id="chatArea" class="chat-area"></div>
+            
+            <!-- Bouton d'interruption -->
+            <div id="stopContainer" class="stop-container">
+                <button id="stopBtn" class="stop-btn" data-tooltip="Interrompre la réponse">
+                    <i class="fas fa-hand"></i>
+                    <span>Interrompre</span>
+                </button>
+            </div>
+            
+            <!-- Zone de saisie -->
+            <div class="input-container">
+                <div class="input-actions">
+                    <button id="uploadBtn" class="upload-btn" data-tooltip="Pièce jointe">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                </div>
+                <div class="input-wrapper">
+                    <textarea id="chatInput" class="chat-input" placeholder="Posez votre question..." rows="1"></textarea>
+                </div>
+                <button id="sendBtn" class="send-btn" data-tooltip="Envoyer">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </main>
+
+        <!-- Panel de sélection de modèle -->
+        <div id="modelPanel" class="model-panel">
+            <!-- Les modèles seront injectés ici -->
+        </div>
+        
+        <!-- Panel de paramètres -->
+        <div id="settingsPanel" class="settings-panel">
+            <div class="settings-header">
+                <h3>Paramètres</h3>
+                <button id="closeSettingsBtn" class="close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="settings-content">
+                <div class="settings-section">
+                    <h4>Apparence</h4>
+                    <div class="theme-selector">
+                        <span>Thème :</span>
+                        <div class="theme-options">
+                            <button id="lightThemeBtn" class="theme-option" data-theme="light">
+                                <i class="fas fa-sun"></i>
+                                <span>Clair</span>
+                            </button>
+                            <button id="darkThemeBtn" class="theme-option" data-theme="dark">
+                                <i class="fas fa-moon"></i>
+                                <span>Sombre</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h4>Prompt système</h4>
+                    <div class="system-prompt-container">
+                        <textarea id="systemPrompt" class="system-prompt" placeholder="Entrez un prompt système (optionnel)..."></textarea>
+                        <div class="prompt-actions">
+                            <button id="savePromptBtn" class="save-prompt-btn">Enregistrer</button>
+                            <button id="clearPromptBtn" class="clear-prompt-btn">Effacer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notification toast -->
+        <div id="toastNotification" class="toast-notification">
+            <i class="fas fa-info-circle"></i>
+            <span id="toastMessage"></span>
+        </div>
+    </div>
+    <script src="../src/js/script.js"></script>
+        <script>
+        // Se connecter au serveur Socket.IO
+        const socket = io();
+
+        // Écouter l'événement 'server_shutdown'
+        socket.on('server_shutdown', () => {
+            console.log('Le serveur est en cours d\'arrêt... Redirection vers shutdown.html');
+            window.location.href = '/shutdown.html'; // Rediriger vers la page de fermeture
+        });
+
+        // Écouter l'événement 'server_restart'
+        socket.on('server_restart', () => {
+            console.log('Le serveur est en cours de redémarrage... Redirection vers restart.html');
+            window.location.href = '/restart.html'; // Rediriger vers la page de redémarrage
+        });
+    </script>
+</body>
+</html>
