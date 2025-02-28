@@ -3,6 +3,8 @@
 
 Ollama Vortex UI is a modern and intuitive user interface for interacting with language models via the Ollama API. This interface offers a smooth and customizable experience, allowing users to chat with language models, manage conversations, and customize the appearance of the interface.
 
+![Ollama Vortex UI Screenshot](./src/screenshot/screenshot.png)
+
 ## Features
 
 ### Main Features
