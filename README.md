@@ -84,6 +84,30 @@ Ollama Vortex UI is a modern and intuitive user interface for interacting with l
 - **Axios**: Used to make HTTP requests to the Ollama API.
 - **Marked**: Library for converting Markdown to HTML, used to display model responses.
 
+
+## License
+
+This project is licensed under the **Exclusive Exploitation License for Ollama Vortex UI**, created and owned by **Dorian Dominici**. Below are the key terms:
+
+### Key Terms
+
+1. **Ownership**: Dorian Dominici retains full intellectual property rights. No ownership is transferred to the User.
+2. **Usage**: The User is granted a non-exclusive, non-transferable license to use the Software as defined in this agreement.
+3. **Restrictions**:  
+   - No modification, redistribution, or reverse engineering of the Software is allowed.  
+   - Any unauthorized use is prohibited.
+4. **Warranty**: The Software is provided "as is," without warranties. The Licensee is not liable for damages.
+5. **Termination**: Violation of terms results in immediate termination of the license.
+6. **Modifications**: The Licensee may update the terms at any time. Continued use implies acceptance.
+7. **Governing Law**: French law applies, with disputes resolved in Paris courts.
+8. **Sanctions**: Violations may lead to legal action, damages, and permanent prohibition of use.
+
+By using this Software, you agree to these terms.
+
+---
+
+For the full license text, see [LICENSE](./LICENSE).
+
 ## Author
 
 - **Dorian Dominici** - [Dorian2B](https://github.com/Dorian2B)
